@@ -1,23 +1,21 @@
-from src.blueprints import (
-    aws_three_tier,
-    data_pipeline,
-    homelab,
-    kubernetes,
-    serverless,
-)
-from src.utils import generate_multiple_diagrams
+from pathlib import Path
+from src.blueprints.homelab import create_homelab_diagram
+from src.blueprints.aws_three_tier import create_aws_three_tier_diagram
+from src.blueprints.data_pipeline import create_data_pipeline_diagram
+from src.blueprints.kubernetes import create_kubernetes_diagram
+from src.blueprints.serverless import create_serverless_diagram
 
 
 def main() -> None:
-    diagrams_to_generate: list[tuple[object, str, str]] = [
-        (homelab, "Homelab Overview", "TB"),
-        (aws_three_tier, "AWS Three-Tier Architecture", "TB"),
-        (serverless, "Serverless Architecture", "TB"),
-        (kubernetes, "Kubernetes Deployment", "LR"),
-        (data_pipeline, "Data Processing Pipeline", "LR"),
-    ]
+    Path("output").mkdir(exist_ok=True)
 
-    generate_multiple_diagrams(diagrams_to_generate)
+    create_homelab_diagram()
+    create_aws_three_tier_diagram()
+    create_serverless_diagram()
+    create_kubernetes_diagram()
+    create_data_pipeline_diagram()
+
+    print("All diagrams generated successfully!")
 
 
 if __name__ == "__main__":
