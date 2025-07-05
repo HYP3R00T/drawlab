@@ -10,3 +10,7 @@ experimental = true                              # needed for `python.uv_venv_au
 
 [hooks]
 enter = "bash ./scripts/setup_project"
+
+[tasks.drawlab]
+description = "Run drawlab script"
+run = "uv run python -m src.main"
